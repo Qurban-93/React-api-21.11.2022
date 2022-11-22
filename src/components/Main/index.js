@@ -4,7 +4,7 @@ import React from 'react'
 
 
 function Main() {
-
+const [comand , setComand] = React.useState(false);
 const [users , setUsers] = React.useState([]);
 const [newUser , setNewUser] = React.useState({
   name:'',
@@ -25,7 +25,10 @@ const handleChangeInputValue = (e)=>{
 }
 
 const pushAddBtn = () =>{
+  setComand(true);
+}
 
+React.useEffect(()=>{
   if(newUser.avatar&& newUser.name&&newUser.surname){
     fetch("https://6363b0578a3337d9a2e48d82.mockapi.io/userscontent/users",{
       method:"POST",
@@ -35,10 +38,7 @@ const pushAddBtn = () =>{
       body:JSON.stringify(newUser),
     });
   }
-  else{alert("Boshluqlar var !")}
-}
-
-React.useEffect(()=>{},[])
+},[comand])
 
   return (
     <>
